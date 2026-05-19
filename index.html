@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>for Lei</title>
+<meta property="og:title" content="for Lei" />
+<meta property="og:description" content="a little something — for Leivino Krisdeni, 19.05" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Archivo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#111;
+    --surface:#161616;
+    --surface-2:#1f1f1f;
+    --line:#2a2a2a;
+    --text:#f2f2f2;
+    --text-dim:#8a8a8a;
+    --text-faint:#555;
+    --grey:#3a3a3a;
+    --light:#e8e8e8;
+    --accent:#6CABDD;
+    --accent-soft:rgba(108,171,221,0.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");opacity:.5;z-index:9999;mix-blend-mode:overlay}
+  .gate{position:fixed;inset:0;z-index:10000;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .9s ease,visibility .9s ease}
+  .gate.hidden{opacity:0;visibility:hidden}
+  .gate-mark{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-dim);margin-bottom:32px}
+  .gate-title{font-family:'Anton',sans-serif;font-size:clamp(36px,7vw,86px);letter-spacing:.01em;line-height:.95;text-align:center;max-width:14ch;background:linear-gradient(180deg,#fff 0%,#aaa 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .gate-sub{margin-top:16px;font-size:13px;color:var(--text-dim);letter-spacing:.2em;text-transform:uppercase}
+  .gate-btn{margin-top:48px;background:transparent;color:var(--text);border:1px solid var(--text);padding:18px 44px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.35em;text-transform:uppercase;cursor:pointer;transition:all .3s ease}
+  .gate-btn:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+  .gate-hint{margin-top:18px;font-size:11px;color:var(--text-faint);letter-spacing:.15em}
+  .spotify-dock{position:fixed;bottom:20px;right:20px;z-index:9000;width:340px;background:rgba(15,15,15,.85);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;padding:10px 12px 12px;opacity:0;transform:translateY(20px);transition:opacity .6s ease .8s, transform .6s ease .8s;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .spotify-dock.visible{opacity:1;transform:none}
+  .spotify-label{display:flex;align-items:center;gap:8px;padding:2px 4px 8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+  .sp-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.6s ease-in-out infinite;flex-shrink:0}
+  .spotify-dock iframe{display:block;border-radius:10px}
+  @keyframes pulse{0%,100%{opacity:.45;transform:scale(.9)}50%{opacity:1;transform:scale(1.1)}}
+  @media (max-width:520px){.spotify-dock{width:calc(100vw - 32px);right:16px;bottom:16px}}
+  section{min-height:100vh;padding:80px 6vw;position:relative;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--accent)}
+  .hero{background:radial-gradient(ellipse at 70% 30%, rgba(108,171,221,.08) 0%, transparent 50%),linear-gradient(180deg,#0a0a0a 0%,#141414 100%);overflow:hidden}
+  .hero-blur{position:absolute;top:0;right:-10%;width:70%;height:100%;background:radial-gradient(ellipse,#3a3a3a 0%,transparent 60%);filter:blur(80px);opacity:.5}
+  .hero-content{position:relative;z-index:2;max-width:1400px;width:100%;margin:0 auto}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:80px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim)}
+  .hero-top .mark{border:1px solid var(--line);padding:6px 14px;border-radius:999px}
+  .hero h1{font-family:'Anton',sans-serif;font-size:clamp(72px,15vw,220px);line-height:.88;letter-spacing:-.01em;text-transform:uppercase}
+  .hero h1 span{color:var(--accent)}
+  .hero-meta{margin-top:60px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;border-top:1px solid var(--line);padding-top:32px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+  .hero-meta strong{display:block;color:var(--text);font-weight:400;margin-top:6px;font-size:14px}
+  .run{background:#0f0f0f}
+  .run-grid{max-width:1200px;width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .run-card{background:linear-gradient(180deg,rgba(40,40,40,.6) 0%,rgba(25,25,25,.4) 100%);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:24px;padding:36px;position:relative;overflow:hidden}
+  .run-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 50%,rgba(108,171,221,.06) 0%,transparent 60%);pointer-events:none}
+  .run-tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim)}
+  .run-card h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:42px;letter-spacing:-.02em;margin-top:16px}
+  .run-card .place{color:var(--text-dim);font-size:14px;margin-top:4px;letter-spacing:.05em}
+  .stat-block{margin-top:32px}
+  .stat-block .label{font-size:11px;color:var(--text-dim);letter-spacing:.2em;text-transform:uppercase}
+  .stat-block .value{font-family:'Archivo',sans-serif;font-weight:700;font-size:36px;margin-top:4px;letter-spacing:-.01em}
+  .stat-block .sub{font-size:11px;color:var(--text-faint);letter-spacing:.15em;text-transform:uppercase;margin-top:6px}
+  .wave{margin-top:14px;width:100%;height:36px}
+  .bars{margin-top:32px;display:flex;gap:6px;height:48px}
+  .bars span{flex:1;background:rgba(255,255,255,.08);border-radius:6px}
+  .bars span.on{background:var(--accent);opacity:.9}
+  .run-copy h2{font-family:'Anton',sans-serif;font-size:clamp(48px,7vw,96px);line-height:.92;text-transform:uppercase;letter-spacing:-.01em}
+  .run-copy p{margin-top:24px;color:var(--text-dim);max-width:440px;font-size:15px;line-height:1.7}
+  .oasis{background:#111;padding:120px 6vw}
+  .oasis-wrap{max-width:1400px;margin:0 auto;width:100%}
+  .oasis-top{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:48px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim)}
+  .oasis-title{font-family:'Anton',sans-serif;font-size:clamp(120px,22vw,320px);line-height:.85;letter-spacing:-.02em;text-align:center;background:linear-gradient(180deg,#fff 0%,#666 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .oasis-quote{text-align:center;max-width:720px;margin:48px auto 0;font-family:'Archivo',sans-serif;font-weight:300;font-style:italic;font-size:clamp(20px,2.4vw,28px);line-height:1.45;color:var(--light)}
+  .oasis-quote::before,.oasis-quote::after{content:'"';color:var(--accent);font-weight:600}
+  .oasis-credit{margin-top:16px;text-align:center;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim)}
+  .oasis-bottom{margin-top:80px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px;border-top:1px solid var(--line);padding-top:32px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint)}
+  .oasis-bottom div b{display:block;color:var(--text);font-weight:400;font-size:13px;margin-bottom:4px;letter-spacing:.15em}
+  .brands{background:#0c0c0c;overflow:hidden}
+  .brands-wrap{max-width:1400px;margin:0 auto;width:100%}
+  .brands h2{font-family:'Anton',sans-serif;font-size:clamp(56px,9vw,140px);line-height:.9;text-transform:uppercase;letter-spacing:-.01em;max-width:900px}
+  .brands h2 i{font-style:normal;color:var(--accent)}
+  .brand-row{margin-top:80px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .brand{padding:48px 24px;text-align:center;border-right:1px solid var(--line);transition:background .3s ease}
+  .brand:last-child{border-right:none}
+  .brand:hover{background:var(--accent-soft)}
+  .brand .name{font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em}
+  .brand .tag{margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim)}
+  .marquee{margin-top:60px;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0}
+  .marquee-track{display:flex;gap:60px;white-space:nowrap;animation:scroll 28s linear infinite;font-family:'Anton',sans-serif;font-size:42px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-faint)}
+  .marquee-track span{display:inline-flex;align-items:center;gap:60px}
+  .marquee-track i{font-style:normal;color:var(--accent);font-size:20px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .op{background:#0a0a0a;position:relative}
+  .op-wrap{max-width:1100px;margin:0 auto;width:100%}
+  .op-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center}
+  .op-kanji{font-family:serif;font-size:clamp(140px,22vw,280px);line-height:.9;color:var(--text);text-align:center;position:relative}
+  .op-kanji span{display:block;color:var(--accent);font-size:14px;letter-spacing:.5em;font-family:'Space Mono',monospace;text-transform:uppercase;margin-top:24px}
+  .op-copy h2{font-family:'Anton',sans-serif;font-size:clamp(40px,5.5vw,72px);line-height:.95;text-transform:uppercase;letter-spacing:-.005em}
+  .op-copy p{margin-top:24px;color:var(--text-dim);font-size:15px;line-height:1.7;max-width:480px}
+  .op-chips{margin-top:32px;display:flex;gap:8px;flex-wrap:wrap}
+  .op-chips span{border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+  .ts{background:#fafafa;color:#0a0a0a}
+  .ts .eyebrow{color:#444}
+  .ts .eyebrow::before{background:#444}
+  .ts-wrap{max-width:1300px;margin:0 auto;width:100%}
+  .ts h2{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(40px,5.5vw,76px);line-height:1;letter-spacing:-.02em;max-width:900px}
+  .ts h2 i{font-style:italic;font-weight:400;color:#666}
+  .ts-sub{margin-top:20px;color:#555;font-size:16px;max-width:620px;line-height:1.6}
+  .ts-grid{margin-top:64px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid #ddd}
+  .ts-cell{padding:32px 24px 40px;border-right:1px solid #ddd;border-bottom:1px solid #ddd}
+  .ts-cell:last-child{border-right:none}
+  .ts-cell .layer{font-family:'Inter',sans-serif;font-size:12px;color:#777;margin-bottom:32px}
+  .ts-cell .name{font-family:'Archivo',sans-serif;font-weight:800;font-size:32px;letter-spacing:-.02em;line-height:1}
+  .ts-cell .name i{font-style:italic;font-weight:400}
+  .ts-cell .desc{margin-top:64px;font-size:13px;color:#444;line-height:1.55}
+  .ts-aside{margin-top:24px;margin-left:auto;display:inline-flex;align-items:flex-start;gap:14px;border:1px dashed #c8c8c8;border-radius:14px;padding:14px 20px;max-width:340px;float:right;background:#fff}
+  .ts-aside .plus{font-family:'Archivo',sans-serif;font-weight:900;font-size:28px;line-height:1;color:#222}
+  .ts-aside-name{font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em;color:#0a0a0a}
+  .ts-aside-desc{margin-top:4px;font-size:12px;color:#666;line-height:1.5}
+  .ts-foot{clear:both;margin-top:48px;display:flex;justify-content:space-between;align-items:end;font-size:12px;color:#555}
+  .ts-foot strong{font-family:'Archivo',sans-serif;font-weight:800;color:#0a0a0a}
+  .letter{background:linear-gradient(180deg,#0a0a0a 0%,#111 100%);padding:140px 6vw}
+  .letter-wrap{max-width:760px;margin:0 auto;width:100%}
+  .letter-mark{text-align:center;margin-bottom:40px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent)}
+  .letter h2{text-align:center;font-family:'Anton',sans-serif;font-size:clamp(48px,7vw,96px);line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:8px}
+  .letter-date{text-align:center;color:var(--text-dim);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:64px}
+  .letter-body{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:16px;padding:56px 52px;font-family:'Inter',sans-serif;font-weight:300;font-size:17px;line-height:1.8;color:var(--light)}
+  .letter-body p{margin-bottom:22px}
+  .letter-body .lead{color:#fff;font-size:18px}
+  .letter-body .ask{margin:36px 0 28px;font-family:'Archivo',sans-serif;font-style:italic;font-size:22px;color:#fff;line-height:1.4}
+  .letter-body .setup{color:var(--text-dim);margin-bottom:12px;font-size:15px}
+  .letter-body .stanza{margin:0 0 32px;padding:18px 22px;border-left:2px solid var(--accent);background:rgba(108,171,221,.04);border-radius:0 8px 8px 0}
+  .letter-body .stanza .hl{display:inline-block;color:var(--accent);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.35em;text-transform:uppercase;margin-bottom:8px}
+  .letter-body .stanza p{margin:0;color:var(--light);font-size:17px;line-height:1.75}
+  .letter-body .close{margin-top:40px;color:var(--text-dim);font-style:italic}
+  .letter-body .finale{margin-top:48px;margin-bottom:6px;font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(30px,4.4vw,46px);line-height:1.1;text-transform:lowercase;color:#fff;letter-spacing:-.005em}
+  .letter-body .finale i{font-style:italic;color:var(--accent);font-weight:300}
+  .letter-body .whisper{margin-top:10px;font-style:italic;color:var(--text-faint);font-size:14px}
+  .closing{background:#000;min-height:80vh;text-align:center;padding:120px 6vw}
+  .closing-mark{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);margin-bottom:32px}
+  .closing h2{font-family:'Anton',sans-serif;font-size:clamp(60px,11vw,180px);line-height:.9;letter-spacing:-.01em;text-transform:uppercase}
+  .closing h2 span{background:linear-gradient(180deg,#fff 0%,#444 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .closing p{margin-top:32px;color:var(--text-dim);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase}
+  .closing .stamp{margin-top:80px;display:inline-block;border:1px solid var(--line);border-radius:999px;padding:10px 22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim)}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s ease,transform 1s ease}
+  .reveal.in{opacity:1;transform:none}
+  /* ===== PASSWORD GATE ===== */
+  .password-gate{position:fixed;inset:0;z-index:10001;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 24px;transition:opacity .7s ease,visibility .7s ease}
+  .password-gate.hidden{opacity:0;visibility:hidden}
+  .pg-mark{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--text-faint);margin-bottom:28px}
+  .pg-title{font-family:'Anton',sans-serif;font-size:clamp(30px,5vw,56px);letter-spacing:.01em;line-height:1;text-align:center;color:#fff;max-width:14ch}
+  .pg-hint{margin-top:14px;font-size:11px;color:var(--text-dim);letter-spacing:.2em;text-transform:uppercase;font-family:'Space Mono',monospace;text-align:center}
+  .pg-form{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:18px;width:100%;max-width:320px}
+  .pg-input{background:transparent;color:#fff;border:none;border-bottom:1px solid #444;padding:14px 16px;width:100%;text-align:center;font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.15em;outline:none;transition:border-color .25s ease}
+  .pg-input:focus{border-bottom-color:var(--accent)}
+  .pg-input.shake{animation:shake .45s ease}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+  .pg-error{font-size:10px;color:#d66;letter-spacing:.25em;text-transform:uppercase;font-family:'Space Mono',monospace;height:14px;opacity:0;transition:opacity .25s ease}
+  .pg-error.show{opacity:1}
+  .pg-btn{background:transparent;color:#fff;border:1px solid #444;padding:14px 36px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;transition:all .25s ease}
+  .pg-btn:hover{background:var(--accent);color:#000;border-color:var(--accent)}
+  @media (max-width:880px){
+    .hero-meta{grid-template-columns:1fr}
+    .run-grid{grid-template-columns:1fr}
+    .oasis-bottom{grid-template-columns:1fr 1fr}
+    .brand-row{grid-template-columns:1fr 1fr}
+    .brand:nth-child(2n){border-right:none}
+    .brand:nth-child(1),.brand:nth-child(2){border-bottom:1px solid var(--line)}
+    .op-grid{grid-template-columns:1fr;gap:32px}
+    .ts-grid{grid-template-columns:1fr 1fr}
+    .ts-cell:nth-child(2n){border-right:none}
+    .ts-aside{float:none;margin:24px 0 0;max-width:100%}
+    .letter-body{padding:36px 24px;font-size:15px}
+    .letter-body .stanza{padding:16px 18px}
+    .letter-body .stanza p{font-size:15px}
+  }
+</style>
+</head>
+<body>
+<div class="password-gate" id="passwordGate">
+  <div class="pg-mark">— private · for one person ·</div>
+  <div class="pg-title">password, please.</div>
+  <div class="pg-hint">if you forgot — just text Yul.</div>
+  <form class="pg-form" id="pgForm">
+    <input class="pg-input" id="pgInput" type="password" autocomplete="off" placeholder="•••••••••••" autocapitalize="off" spellcheck="false" />
+    <div class="pg-error" id="pgError">not quite. try again.</div>
+    <button class="pg-btn" type="submit">Unlock ▸</button>
+  </form>
+</div>
+<div class="gate" id="gate">
+  <div class="gate-mark">— for Leivino Krisdeni · 19.05 ·</div>
+  <div class="gate-title">You might want to open<br/>this lil something.</div>
+  <button class="gate-btn" id="gateBtn">Open ▸</button>
+  <div class="gate-hint">press ▸ on the player · scroll slowly</div>
+</div>
+<div class="spotify-dock" id="spotifyDock">
+  <div class="spotify-label">
+    <span class="sp-dot"></span>
+    <span>Now playing · tap ▸ to start</span>
+  </div>
+  <iframe id="spotify" src="https://open.spotify.com/embed/track/1vZfhQ1VOdea1rPoYsbc1v?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
+<section class="hero">
+  <div class="hero-blur"></div>
+  <div class="hero-content">
+    <div class="hero-top">
+      <span class="mark">birthday plan · year 01</span>
+      <span>19 / 05 / 2026</span>
+    </div>
+    <h1 class="reveal">just<br/>a little<br/><span>something.</span></h1>
+    <div class="hero-meta reveal">
+      <div>For<strong>Leivino Krisdeni</strong></div>
+      <div>From<strong>Yul</strong></div>
+      <div>Filed under<strong>not work · for once</strong></div>
+    </div>
+  </div>
+</section>
+<section class="run">
+  <div class="run-grid">
+    <div class="run-card reveal">
+      <span class="run-tag">Life Plan · Week ∞</span>
+      <h3>Another Lap</h3>
+      <div class="place">Earth · same orbit, one more time</div>
+      <div class="stat-block">
+        <div class="label">Distance covered</div>
+        <div class="value">28+ years</div>
+        <svg class="wave" viewBox="0 0 400 36" preserveAspectRatio="none"><path d="M0,22 C30,10 60,28 90,18 C120,8 150,30 180,16 C210,4 240,28 270,14 C300,2 330,26 360,16 C380,10 400,18 400,18" stroke="#fff" stroke-width="1.4" fill="none" opacity=".75"/></svg>
+        <div class="sub">Elevation gain: significant</div>
+      </div>
+      <div class="stat-block">
+        <div class="label">Pace</div>
+        <div class="value">your own.</div>
+        <svg class="wave" viewBox="0 0 400 36" preserveAspectRatio="none"><polyline points="0,18 10,12 20,22 30,8 40,26 50,14 60,20 70,6 80,28 90,16 100,22 110,10 120,24 130,12 140,20 150,8 160,26 170,14 180,22 190,10 200,24 210,16 220,20 230,8 240,26 250,12 260,22 270,14 280,20 290,10 300,24 310,16 320,22 330,8 340,26 350,14 360,20 370,12 380,24 390,16 400,20" stroke="#fff" stroke-width="1.3" fill="none" opacity=".8"/></svg>
+        <div class="sub">Fastest: when no one's watching</div>
+      </div>
+      <div class="stat-block">
+        <div class="label">Time</div>
+        <div class="value">all of it.</div>
+      </div>
+      <div class="bars" aria-hidden="true"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div>
+    </div>
+    <div class="run-copy reveal">
+      <div class="eyebrow">chapter one · the run</div>
+      <h2>some people run from things.<br/>you run toward them.</h2>
+      <p>The early starts. The shoes by the door. The way kilometers turn into thinking time — and thinking time turns into the next idea, the next move, the next late-night message about what we're building. Keep going.</p>
+    </div>
+  </div>
+</section>
+<section class="oasis">
+  <div class="oasis-wrap">
+    <div class="oasis-top reveal"><span>—— soundtrack</span><span>side b · slow burn</span></div>
+    <div class="oasis-title reveal">OASIS</div>
+    <div class="oasis-quote reveal">True perfection has to be imperfect — I know that sounds foolish, but it's true.</div>
+    <div class="oasis-credit">— Little by Little · Heathen Chemistry · 2002</div>
+    <div class="oasis-bottom reveal">
+      <div><b>Liam</b>The voice</div>
+      <div><b>Noel</b>The pen</div>
+      <div><b>Manchester</b>The home</div>
+      <div><b>You</b>The kind of fan who plays it on the way to a Sunday long run</div>
+    </div>
+  </div>
+</section>
+<section class="brands">
+  <div class="brands-wrap">
+    <div class="eyebrow reveal">chapter three · the gear</div>
+    <h2 class="reveal">the small obsessions <i>that</i> make the big ones possible.</h2>
+    <div class="brand-row reveal">
+      <div class="brand"><div class="name">adidas</div><div class="tag">adizero · race day</div></div>
+      <div class="brand"><div class="name">asics</div><div class="tag">metaspeed · the rotation</div></div>
+      <div class="brand"><div class="name">nike</div><div class="tag">vaporfly · alphafly · vomero</div></div>
+      <div class="brand"><div class="name">on · hoka · saucony</div><div class="tag">the deep cuts</div></div>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Brussels 20K <i>✦</i> Athens Night Run <i>✦</i> Jakarta Marathon <i>✦</i> Cadence <i>✦</i> Shake-out Sundays <i>✦</i> Tempo Tuesdays <i>✦</i> Long-run Saturdays <i>✦</i></span>
+        <span>Brussels 20K <i>✦</i> Athens Night Run <i>✦</i> Jakarta Marathon <i>✦</i> Cadence <i>✦</i> Shake-out Sundays <i>✦</i> Tempo Tuesdays <i>✦</i> Long-run Saturdays <i>✦</i></span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="op">
+  <div class="op-wrap">
+    <div class="op-grid">
+      <div class="op-kanji reveal">仲間<span>nakama</span></div>
+      <div class="op-copy reveal">
+        <div class="eyebrow">chapter four · the crew</div>
+        <h2>some treasures aren't<br/>on the map.</h2>
+        <p>Luffy didn't sail alone. Every great chapter has a crew that shows up — for the storms, the dumb jokes, the long stretches between islands. Here's to the next arc.</p>
+        <div class="op-chips"><span>Dreams</span><span>Loyalty</span><span>Stupid bets</span><span>Showing up</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ts">
+  <div class="ts-wrap">
+    <div class="eyebrow reveal">chapter five · what we built</div>
+    <h2 class="reveal">four layers. <i>one</i> business. <i>same</i> dreams.</h2>
+    <p class="ts-sub reveal">Before the cake, a quiet shoutout to what we've put on the table — together. None of these run without you.</p>
+    <div class="ts-grid reveal">
+      <div class="ts-cell"><div class="layer">a Media</div><div class="name">teman<br/>startup</div><div class="desc">Editorial reach. 123K and counting. Where brands become stories.</div></div>
+      <div class="ts-cell"><div class="layer">a Community</div><div class="name">TSClub</div><div class="desc">Invite-only circle of 300+ founders. Trust at the center.</div></div>
+      <div class="ts-cell"><div class="layer">a Festival</div><div class="name">The<br/>Commons</div><div class="desc">Quarterly flagship. 8K+ humans across editions.</div></div>
+      <div class="ts-cell"><div class="layer">an Agency</div><div class="name">TS <i>for</i> Business</div><div class="desc">Productized brand activations & community for mid-market.</div></div>
+    </div>
+    <div class="ts-aside reveal">
+      <span class="plus">+</span>
+      <div>
+        <div class="ts-aside-name">TS Retail</div>
+        <div class="ts-aside-desc">the newest small thing on the side — quietly cooking.</div>
+      </div>
+    </div>
+    <div class="ts-foot reveal">
+      <span><strong>One ecosystem.</strong> Each layer feeds the next.</span>
+      <span>Year on year — built with Lei.</span>
+    </div>
+  </div>
+</section>
+<section class="letter">
+  <div class="letter-wrap">
+    <div class="letter-mark reveal">— the letter</div>
+    <h2 class="reveal">a note for you.</h2>
+    <div class="letter-date reveal">tuesday · 19 may 2026</div>
+    <div class="letter-body reveal" id="letterBody">
+      <p class="lead">I know you wanna cry scrolling all these, but no, not yet.<br/>Here comes the best part.</p>
+      <p>It's a day not to be celebrated the big way,<br/>but just this little and small and often forgotten way (my way).</p>
+      <p>I always the one who appreciate the small things, a firm believer that life's full of the small things, not the big things.</p>
+      <p class="ask">So what are the smalls for you?</p>
+      <p class="setup">While in my opinion, to you —</p>
+      <div class="stanza"><span class="hl">small means</span><p>you showing up everyday, even when God knows how tiring and painful and not easy it is.</p></div>
+      <div class="stanza"><span class="hl">small means</span><p>every "akh we're not there yet" and every "try again".</p></div>
+      <div class="stanza"><span class="hl">small means</span><p>every bouncy step you take on your run and your everyday life in work, and everything.<br/>sometimes the road is smooth aspal, but sometimes you have to cross the road, and sometimes you have to step on rocks and muds.</p></div>
+      <div class="stanza"><span class="hl">small means</span><p>every small post, every small or casual words from others that slowly coming to you and help you cross off your longtime dreams one by one.</p></div>
+      <div class="stanza"><span class="hl">small means</span><p>you finally taking things as it is — because life's meant to celebrate the small things, not only and always the big big things.</p></div>
+      <p class="close">life's not gonna get easier.<br/>and what's ahead — well, no one really knows.<br/>but you got this another small creature, in front of you (more often beside you), that will help you cross off more small things in this life.</p>
+      <p class="finale">happy <i>(not so little)</i> birthday.</p>
+      <p class="whisper">okay, you can cry now.</p>
+    </div>
+  </div>
+</section>
+<section class="closing">
+  <div class="closing-mark reveal">— the end of the page · not the run</div>
+  <h2 class="reveal"><span>happy</span><br/><span>birthday</span></h2>
+  <p class="reveal">19 . 05 . 2026 · Lei · with love</p>
+  <div class="stamp reveal">made by Yul · one scroll · one song</div>
+</section>
+<script>
+  // ===== Password gate =====
+  // SHA-256 of the password. To change the password, replace this hash —
+  // generate at: https://emn178.github.io/online-tools/sha256.html
+  const PW_HASH = 'b1e066e44a97a20626c2736e8dbbebd16c3036e827bfc330d3b0341d44cfd068';
+
+  async function sha256(str){
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+
+  const pwGate = document.getElementById('passwordGate');
+  const pgForm = document.getElementById('pgForm');
+  const pgInput = document.getElementById('pgInput');
+  const pgError = document.getElementById('pgError');
+
+  // remembers successful unlock for this device
+  if(sessionStorage.getItem('unlocked') === 'yes'){
+    pwGate.style.display = 'none';
+  } else {
+    setTimeout(()=>pgInput.focus(), 200);
+  }
+
+  pgForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const val = pgInput.value.trim().toLowerCase();
+    if(!val) return;
+    const h = await sha256(val);
+    if(h === PW_HASH){
+      try{ sessionStorage.setItem('unlocked','yes'); }catch(_){}
+      pwGate.classList.add('hidden');
+      setTimeout(()=>{ pwGate.style.display='none'; }, 700);
+    } else {
+      pgError.classList.add('show');
+      pgInput.classList.add('shake');
+      setTimeout(()=>{ pgInput.classList.remove('shake'); }, 500);
+      setTimeout(()=>{ pgError.classList.remove('show'); }, 1500);
+      pgInput.select();
+    }
+  });
+
+  // ===== Entry gate + Spotify =====
+  const gate = document.getElementById('gate');
+  const gateBtn = document.getElementById('gateBtn');
+  const dock = document.getElementById('spotifyDock');
+  gateBtn.addEventListener('click', ()=>{
+    gate.classList.add('hidden');
+    dock.classList.add('visible');
+    initReveal();
+  });
+  function initReveal(){
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:0.12, rootMargin:'0px 0px -10% 0px'});
+    els.forEach(el=>io.observe(el));
+  }
+</script>
+</body>
+</html>
